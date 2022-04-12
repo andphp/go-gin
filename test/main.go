@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	goGo.NewGoGo().Mount(controller.NewIndexCalss()).Run()
+	goGo.NewGoGo().Mount("v1", controller.NewIndexCalss()).Run()
 }

@@ -13,13 +13,19 @@ func NewGoGo() *GoGo {
 	}
 }
 
-func (g *GoGo) Run() {
-	g.Engine.Run(":8080")
+func (ain *GoGo) Run() {
+	ain.Engine.Run(":8080")
 }
 
-func (g *GoGo) Mount(controller ...ControllerInterface) *GoGo {
+func (ain *GoGo) Handle(method, path string, handler gin.HandlerFunc) *GoGo {
+	ain.g.Handle(method, path, handler)
+	return ain
+}
+
+func (ain *GoGo) Mount(group string, controller ...ControllerInterface) *GoGo {
+	ain.g = ain.Group(group)
 	for _, c := range controller {
-		c.Build(g)
+		c.Build(ain)
 	}
-	return g
+	return ain
 }
