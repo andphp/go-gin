@@ -1,5 +1,5 @@
 package goGo
 
-type ControllerInterface interface {
+type RouterInterface interface {
 	Build(GoGo *GoGo)
 }

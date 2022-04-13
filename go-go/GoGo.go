@@ -4,7 +4,7 @@ import "github.com/gin-gonic/gin"
 
 type GoGo struct {
 	*gin.Engine                  //我们把 engine放到 主类里
-	g           *gin.RouterGroup //这里就是保存 group对象
+	GoGroup     *gin.RouterGroup //这里就是保存 group对象
 }
 
 func NewGoGo() *GoGo {
@@ -18,13 +18,13 @@ func (ain *GoGo) Run() {
 }
 
 func (ain *GoGo) Handle(method, path string, handler gin.HandlerFunc) *GoGo {
-	ain.g.Handle(method, path, handler)
+	ain.GoGroup.Handle(method, path, handler)
 	return ain
 }
 
-func (ain *GoGo) Mount(group string, controller ...ControllerInterface) *GoGo {
-	ain.g = ain.Group(group)
-	for _, c := range controller {
+func (ain *GoGo) Mount(group string, routers ...RouterInterface) *GoGo {
+	ain.GoGroup = ain.Group(group)
+	for _, c := range routers {
 		c.Build(ain)
 	}
 	return ain
