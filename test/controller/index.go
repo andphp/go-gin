@@ -1,7 +1,7 @@
 package controller
 
 import (
-	goGo "github.com/andphp/go-gin/go-go"
+	"github.com/andphp/go-gin/goby"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +18,6 @@ func (ain *IndexCalss) GetIndex() gin.HandlerFunc {
 	}
 }
 
-func (ain *IndexCalss) Build(GoGo *goGo.GoGo) {
-	GoGo.Handle("GET", "/", ain.GetIndex())
+func (ain *IndexCalss) Build(G *goby.Goby) {
+	G.Handle("GET", "/", ain.GetIndex())
 }

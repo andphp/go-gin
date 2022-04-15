@@ -1,5 +1,5 @@
-package goGo
+package goby
 
 type RouterInterface interface {
-	Build(GoGo *GoGo)
+	Build(Goby *Goby)
 }

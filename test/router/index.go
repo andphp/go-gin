@@ -1,7 +1,7 @@
 package router
 
 import (
-	goGo "github.com/andphp/go-gin/go-go"
+	"github.com/andphp/go-gin/goby"
 	"github.com/andphp/go-gin/test/controller"
 )
 
@@ -11,6 +11,6 @@ func NewIndexRouter() *IndexRouter {
 	return &IndexRouter{}
 }
 
-func (ain *IndexRouter) Build(GoGo *goGo.GoGo) {
-	GoGo.GoGroup.Group("va").Handle("GET", "/", controller.NewIndexCalss().GetIndex())
+func (ain *IndexRouter) Build(Goby *goby.Goby) {
+	Goby.RouteGroup.Group("va").GET("/", controller.NewIndexCalss().GetIndex())
 }
