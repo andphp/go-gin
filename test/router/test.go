@@ -5,6 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Api(r *gin.RouterGroup) {
-	r.Group("vaq").GET("/w", controller.NewIndexCalss().GetIndex())
+func Test(r *gin.RouterGroup) {
+	r.Group("test").GET("/w", controller.NewIndexCalss().GetIndex())
 }

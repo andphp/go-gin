@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	goby.MakeGin().Mount("v1", router.NewIndexRouter()).Run()
+	goby.MakeGin().RouterMount("v1")(router.Api, router.Test).Run()
 }
