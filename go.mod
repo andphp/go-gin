@@ -3,6 +3,7 @@ module github.com/andphp/go-gin
 go 1.17
 
 require (
+	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220415221154-79c36419192d // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.7.7 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect

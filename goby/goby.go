@@ -8,7 +8,9 @@ type Goby struct {
 	*gin.Engine                  //我们把 engine放到 主类里
 	RouteGroup  *gin.RouterGroup //这里就是保存 group对象
 }
-
+type RouteGroupOption struct {
+	apply func(*gin.RouterGroup)
+}
 func MakeGin() *Goby {
 	return &Goby{
 		Engine: gin.New(),

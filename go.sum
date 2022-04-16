@@ -1,3 +1,7 @@
+github.com/antlr/antlr4 v4.10.1+incompatible h1:JvkZXnblNqWp399R712NOsBaCc62uoVx3w4NNFxpIKk=
+github.com/antlr/antlr4 v4.10.1+incompatible/go.mod h1:T7PbCXFs94rrTttyxjbyT5+/1V8T2TYDejxUfHJjw1Y=
+github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220415221154-79c36419192d h1:Kts4bTFz6tSE4bPFhcZxpCafiBnSOPSnUaame7SqSDc=
+github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220415221154-79c36419192d/go.mod h1:F7bn7fEU90QkQ3tnmaTx3LTKLEDqnwWODIYppRQ5hnY=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=
