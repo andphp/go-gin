@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/andphp/go-gin/goby/config"
+	conf "github.com/andphp/go-gin/goby/config"
 	"github.com/spf13/viper"
 
 	"go.uber.org/zap"
@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	GOBY_CONFIG config.Server
+	GOBY_CONFIG conf.Server
 	GOBY_VIPER  *viper.Viper
 	GOBY_LOG    *zap.Logger
 	GOBY_DB     *gorm.DB
