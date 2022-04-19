@@ -3,9 +3,9 @@ package utils
 import (
 	"flag"
 	"fmt"
+	"github.com/andphp/go-gin/goby"
 	"os"
 
-	"github.com/andphp/go-gin/goby/common"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
@@ -16,9 +16,9 @@ func Viper(path ...string) *viper.Viper {
 		flag.StringVar(&config, "c", "", "choose config file.")
 		flag.Parse()
 		if config == "" { // 优先级: 命令行 > 环境变量 > 默认值
-			if configEnv := os.Getenv(common.ConfigEnv); configEnv == "" {
-				config = common.ConfigFile
-				fmt.Printf("您正在使用config的默认值,config的路径为%v\n", common.ConfigFile)
+			if configEnv := os.Getenv(goby.ConfigEnv); configEnv == "" {
+				config = goby.ConfigFile
+				fmt.Printf("您正在使用config的默认值,config的路径为%v\n", goby.ConfigFile)
 			} else {
 				config = configEnv
 				fmt.Printf("您正在使用GVA_CONFIG环境变量,config的路径为%v\n", config)
@@ -42,11 +42,11 @@ func Viper(path ...string) *viper.Viper {
 
 	v.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("config file changed:", e.Name)
-		if err := v.Unmarshal(&common.GOBY_CONFIG); err != nil {
+		if err := v.Unmarshal(&goby.GOBY_CONFIG); err != nil {
 			fmt.Println(err)
 		}
 	})
-	if err := v.Unmarshal(&common.GOBY_CONFIG); err != nil {
+	if err := v.Unmarshal(&goby.GOBY_CONFIG); err != nil {
 		fmt.Println(err)
 	}
 

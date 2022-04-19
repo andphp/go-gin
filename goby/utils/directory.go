@@ -1,9 +1,9 @@
 package utils
 
 import (
+	"github.com/andphp/go-gin/goby"
 	"os"
 
-	"github.com/andphp/go-gin/goby/common"
 	"go.uber.org/zap"
 )
 
@@ -35,9 +35,9 @@ func CreateDir(dirs ...string) (err error) {
 			return err
 		}
 		if !exist {
-			common.GOBY_LOG.Debug("create directory" + v)
+			goby.GOBY_LOG.Debug("create directory" + v)
 			if err := os.MkdirAll(v, os.ModePerm); err != nil {
-				common.GOBY_LOG.Error("create directory"+v, zap.Any(" error:", err))
+				goby.GOBY_LOG.Error("create directory"+v, zap.Any(" error:", err))
 				return err
 			}
 		}

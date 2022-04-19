@@ -1,8 +1,7 @@
 package mapper
 
 import (
-	"github.com/andphp/go-gin/goby/common"
-
+	"github.com/andphp/go-gin/goby"
 	"gorm.io/gorm"
 )
 
@@ -32,7 +31,7 @@ func (m *SqlMapper) Query() *gorm.DB {
 	if m.db != nil {
 		return m.db.Raw(m.Sql, m.Args...)
 	} else {
-		return common.GOBY_DB.Raw(m.Sql, m.Args...)
+		return goby.GOBY_DB.Raw(m.Sql, m.Args...)
 	}
 
 }
@@ -42,7 +41,7 @@ func (m *SqlMapper) Exec() *gorm.DB {
 	if m.db != nil {
 		return m.db.Exec(m.Sql, m.Args...)
 	}
-	return common.GOBY_DB.Exec(m.Sql, m.Args...)
+	return goby.GOBY_DB.Exec(m.Sql, m.Args...)
 }
 
 type SqlMappers []*SqlMapper
@@ -59,7 +58,7 @@ func (ms SqlMappers) apply(tx *gorm.DB) {
 }
 
 func (ms SqlMappers) Exec(f func() error) {
-	common.GOBY_DB.Transaction(func(tx *gorm.DB) error {
+	goby.GOBY_DB.Transaction(func(tx *gorm.DB) error {
 		ms.apply(tx)
 		return f()
 	})

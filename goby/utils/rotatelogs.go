@@ -1,9 +1,9 @@
 package utils
 
 import (
+	"github.com/andphp/go-gin/goby"
 	"os"
 
-	"github.com/andphp/go-gin/goby/common"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap/zapcore"
 )
@@ -22,7 +22,7 @@ func GetWriteSyncer(file string) zapcore.WriteSyncer {
 		Compress:   true, //是否压缩/归档旧文件
 	}
 
-	if common.GOBY_CONFIG.Zap.LogInConsole {
+	if goby.GOBY_CONFIG.Zap.LogInConsole {
 		return zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(lumberJackLogger))
 	}
 	return zapcore.AddSync(lumberJackLogger)

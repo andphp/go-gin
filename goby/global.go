@@ -1,4 +1,4 @@
-package common
+package goby
 
 import (
 	conf "github.com/andphp/go-gin/goby/config"
