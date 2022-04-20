@@ -11,6 +11,7 @@ type Goby struct {
 type RouteGroupOption struct {
 	apply func(*gin.RouterGroup)
 }
+
 func MakeGin() *Goby {
 	return &Goby{
 		Engine: gin.New(),
@@ -26,10 +27,16 @@ func (ain *Goby) Handle(method, path string, handler gin.HandlerFunc) *Goby {
 	return ain
 }
 
-func (ain *Goby) RouterMount(groupName string, middlebrows ...gin.HandlerFunc) func(opts ...func(*gin.RouterGroup)) *Goby {
-	ain.RouteGroup = ain.Group(groupName)
-	return func(opts ...func(*gin.RouterGroup)) *Goby {
-		for _, middlewareOne := range middlebrows {
+// 注册中间件
+func (ain *Goby) Use(middleware ...gin.HndlerFunc) *Goby {
+	ain.RouteGroup.Use(middleware ...gin.HndlerFunc)
+	return ain
+}
+
+fun (ain *Goby) RouterMount(groupName string, middlebrows ...gin.HandlerFunc) func(opts ...func(*gin.RouterGroup)) *Goby {
+	ain.RouteGrup = ain.Group(groupName)
+	rturn func(opts ...func(*gin.RouterGroup)) *Goby {
+	for _, middlewareOne := range middlebrows {
 			ain.RouteGroup.Use(middlewareOne)
 		}
 		for _, option := range opts {
