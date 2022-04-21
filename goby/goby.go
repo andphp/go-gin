@@ -28,12 +28,14 @@ func (ain *Goby) Handle(method, path string, handler gin.HandlerFunc) *Goby {
 }
 
 // 注册中间件
-func (ain *Goby) Use(middleware ...gin.HndlerFunc) *Goby {
-	ain.RouteGroup.Use(middleware ...gin.HndlerFunc)
+func (ain *Goby) Use(middlewares ...gin.HndlerFunc) *Goby {
+	for _,middleware := range middlewares {
+		ain.RouteGroup.Use(middleware)
+	}
 	return ain
 }
 
-fun (ain *Goby) RouterMount(groupName string, middlebrows ...gin.HandlerFunc) func(opts ...func(*gin.RouterGroup)) *Goby {
+func (ain *Goby) RouterMount(groupName string, middlebrows ...gin.HandlerFunc) func(opts ...func(*gin.RouterGroup)) *Goby {
 	ain.RouteGrup = ain.Group(groupName)
 	rturn func(opts ...func(*gin.RouterGroup)) *Goby {
 	for _, middlewareOne := range middlebrows {
