@@ -12,10 +12,15 @@ type RouteGroupOption struct {
 	apply func(*gin.RouterGroup)
 }
 
-func MakeGin() *Goby {
-	return &Goby{
+func MakeGin(middlewares ...gin.HandlerFunc) *Goby {
+	ain := &Goby{
 		Engine: gin.New(),
 	}
+	ain.Use(ErrorHandler()) 
+	for _, middleware := range middlewares {
+		ain.Use(middleware)
+	}
+	return ain
 }
 
 func (ain *Goby) Run() {
