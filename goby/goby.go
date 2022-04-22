@@ -16,7 +16,7 @@ func MakeGin(middlewares ...gin.HandlerFunc) *Goby {
 	ain := &Goby{
 		Engine: gin.New(),
 	}
-	ain.Use(ErrorHandler()) 
+	//ain.Use(ErrorHandler())
 	for _, middleware := range middlewares {
 		ain.Use(middleware)
 	}
