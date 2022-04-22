@@ -16,9 +16,10 @@ func MakeGin(middlewares ...gin.HandlerFunc) *Goby {
 	ain := &Goby{
 		Engine: gin.New(),
 	}
-	//ain.Use(ErrorHandler())
+	ain.RouteGroup = ain.Group("")
+	ain.RouteGroup.Use(ErrorHandler())
 	for _, middleware := range middlewares {
-		ain.Use(middleware)
+		ain.RouteGroup.Use(middleware)
 	}
 	return ain
 }
