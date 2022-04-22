@@ -6,5 +6,6 @@ import (
 )
 
 func Test(r *gin.RouterGroup) {
+
 	r.Group("test").GET("/w", controller.NewIndexCalss().GetIndex())
 }

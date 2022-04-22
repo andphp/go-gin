@@ -13,8 +13,11 @@ func NewIndexCalss() *IndexCalss {
 }
 
 func (ain *IndexCalss) GetIndex() gin.HandlerFunc {
-	return func(context *gin.Context) {
-		context.JSON(200, gin.H{"result": "success"})
+	return func(c *gin.Context) {
+		//var l model.SysUserModel
+		//echo.Result(c.ShouldBind(&l)).Unwrap(echo.PARAMS_ERROR)
+		//panic("这就是个错误")
+		c.JSON(200, gin.H{"result": "success"})
 	}
 }
 

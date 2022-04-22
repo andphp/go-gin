@@ -47,7 +47,7 @@ func ErrorHandler() gin.HandlerFunc {
 		defer func() {
 			if e := recover(); e != nil {
 				if os.Getenv("GIN_MODE") != "release" {
-					log.Println(panicTrace(10))
+					log.Println("============================", panicTrace(10))
 				}
 				status := 400 //default status==400
 				var code int = 999

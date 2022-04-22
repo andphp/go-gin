@@ -16,10 +16,10 @@ func MakeGin(middlewares ...gin.HandlerFunc) *Goby {
 	ain := &Goby{
 		Engine: gin.New(),
 	}
-	ain.RouteGroup = ain.Group("")
-	ain.RouteGroup.Use(ErrorHandler())
+	//ain.RouteGroup = ain.Group("")
+	ain.Use(ErrorHandler())
 	for _, middleware := range middlewares {
-		ain.RouteGroup.Use(middleware)
+		ain.Use(middleware)
 	}
 	return ain
 }
@@ -34,12 +34,12 @@ func (ain *Goby) Handle(method, path string, handler gin.HandlerFunc) *Goby {
 }
 
 // 注册中间件
-func (ain *Goby) Use(middlewares ...gin.HandlerFunc) *Goby {
-	for _, middleware := range middlewares {
-		ain.RouteGroup.Use(middleware)
-	}
-	return ain
-}
+// func (ain *Goby) Use(middlewares ...gin.HandlerFunc) *Goby {
+// 	for _, middleware := range middlewares {
+// 		ain.Use(middleware)
+// 	}
+// 	return ain
+// }
 
 func (ain *Goby) RouterMount(groupName string, middlebrows ...gin.HandlerFunc) func(opts ...func(*gin.RouterGroup)) *Goby {
 	ain.RouteGroup = ain.Group(groupName)
