@@ -72,7 +72,7 @@ func ErrorHandler() gin.HandlerFunc {
 						status = v
 					}
 				}
-				context.JSON(status, gin.H{"msg": msg, "code": code, "data": errorData})
+				context.AbortWithStatusJSON(status, gin.H{"msg": msg, "code": code, "data": errorData})
 			}
 		}()
 		context.Next()
