@@ -1,6 +1,9 @@
 package goby
 
 import (
+	"reflect"
+
+	"github.com/andphp/go-gin/goby/ioc"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,6 +28,7 @@ func MakeGin(middlewares ...gin.HandlerFunc) *Goby {
 }
 
 func (ain *Goby) Run() {
+	ain.applyAll()
 	ain.Engine.Run(":8080")
 }
 
@@ -52,5 +56,18 @@ func (ain *Goby) RouterMount(groupName string, middlebrows ...gin.HandlerFunc) f
 			routeGroupOption.apply(ain.RouteGroup)
 		}
 		return ain
+	}
+}
+
+func (ain *Goby) Config(cfgs ...interface{}) *Goby {
+	ioc.BeanFactory.Config(cfgs...)
+	return ain
+}
+
+func (ain *Goby) applyAll() {
+	for t, v := range ioc.BeanFactory.GetBeanMapper() {
+		if t.Elem().Kind() == reflect.Struct {
+			ioc.BeanFactory.Apply(v.Interface())
+		}
 	}
 }
