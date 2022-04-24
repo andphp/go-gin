@@ -69,6 +69,7 @@ func Output(c *gin.Context) ResultFunc {
 			r.Code = code
 			r.Data = result
 			c.JSON(httpState, r)
+			return
 		}
 	}
 }
