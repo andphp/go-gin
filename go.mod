@@ -3,7 +3,6 @@ module github.com/andphp/go-gin
 go 1.17
 
 require (
-	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220418222510-f25a4f6275ed
 	github.com/fatih/structs v1.1.0
 	github.com/fsnotify/fsnotify v1.5.3
 	github.com/gin-gonic/gin v1.7.7
@@ -20,6 +19,7 @@ require (
 )
 
 require (
+	github.com/antlr/antlr4 v4.10.1+incompatible // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
