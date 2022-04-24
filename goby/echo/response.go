@@ -68,8 +68,7 @@ func Output(c *gin.Context) ResultFunc {
 			r.Message = message
 			r.Code = code
 			r.Data = result
-			c.JSON(httpState, r)
-			return
+			c.AbortWithStatusJSON(httpState, r)
 		}
 	}
 }
