@@ -1,4 +1,4 @@
-package jwt
+package jwtService
 
 import (
 	"context"
@@ -16,7 +16,7 @@ type JwtService struct {
 //@return: err error
 
 func (jwtService *JwtService) JsonInBlacklist(token string) (err error) {
-	goby.BlackCache.SetDefault(token, struct{}{})
+	goby.GOBY_BlackCache.SetDefault(token, struct{}{})
 	return
 }
 

@@ -3,6 +3,8 @@ package utils
 import (
 	"errors"
 	"github.com/andphp/go-gin/goby"
+	jwtService "github.com/andphp/go-gin/goby/jwt"
+	"github.com/dgrijalva/jwt-go"
 	"time"
 )
 
@@ -23,8 +25,8 @@ func NewJWT() *JWT {
 	}
 }
 
-func (j *JWT) CreateClaims(session requestparams.Session) requestparams.CustomSession {
-	claims := requestparams.CustomSession{
+func (j *JWT) CreateClaims(session jwtService.Session) jwtService.CustomSession {
+	claims := jwtService.CustomSession{
 		Session:    session,
 		BufferTime: goby.GOBY_CONFIG.JWT.BufferTime, // 缓冲时间1天 缓冲时间内会获得新的token刷新令牌 此时一个用户会存在两个有效令牌 但是前端只留一个 另一个会丢失
 		StandardClaims: jwt.StandardClaims{
@@ -37,13 +39,13 @@ func (j *JWT) CreateClaims(session requestparams.Session) requestparams.CustomSe
 }
 
 // 创建一个token
-func (j *JWT) CreateToken(claims requestparams.CustomSession) (string, error) {
+func (j *JWT) CreateToken(claims jwtService.CustomSession) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(j.SigningKey)
 }
 
 // CreateTokenByOldToken 旧token 换新token 使用归并回源避免并发问题
-func (j *JWT) CreateTokenByOldToken(oldToken string, claims requestparams.CustomSession) (string, error) {
+func (j *JWT) CreateTokenByOldToken(oldToken string, claims jwtService.CustomSession) (string, error) {
 	v, err, _ := goby.GOBY_Concurrency_Control.Do("JWT:"+oldToken, func() (interface{}, error) {
 		return j.CreateToken(claims)
 	})
@@ -51,8 +53,8 @@ func (j *JWT) CreateTokenByOldToken(oldToken string, claims requestparams.Custom
 }
 
 // 解析 token
-func (j *JWT) ParseToken(tokenString string) (*requestparams.CustomSession, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &requestparams.CustomSession{}, func(token *jwt.Token) (i interface{}, e error) {
+func (j *JWT) ParseToken(tokenString string) (*jwtService.CustomSession, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &jwtService.CustomSession{}, func(token *jwt.Token) (i interface{}, e error) {
 		return j.SigningKey, nil
 	})
 	if err != nil {
@@ -70,7 +72,7 @@ func (j *JWT) ParseToken(tokenString string) (*requestparams.CustomSession, erro
 		}
 	}
 	if token != nil {
-		if claims, ok := token.Claims.(*requestparams.CustomSession); ok && token.Valid {
+		if claims, ok := token.Claims.(*jwtService.CustomSession); ok && token.Valid {
 			return claims, nil
 		}
 		return nil, TokenInvalid

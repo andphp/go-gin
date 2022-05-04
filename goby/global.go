@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/viper"
 
 	"go.uber.org/zap"
+	"golang.org/x/sync/singleflight"
 	"gorm.io/gorm"
 )
 
@@ -16,5 +17,6 @@ var (
 	GOBY_LOG    *zap.Logger
 	GOBY_DB     *gorm.DB
 	GOBY_REDIS  *redis.Client
-	BlackCache  local_cache.Cache
+	GOBY_BlackCache  local_cache.Cache
+	GOBY_Concurrency_Control = &singleflight.Group{}
 )
