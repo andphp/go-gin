@@ -3,6 +3,7 @@ package goby
 import (
 	conf "github.com/andphp/go-gin/goby/config"
 	"github.com/go-redis/redis/v8"
+	"github.com/songzhibin97/gkit/cache/local_cache"
 	"github.com/spf13/viper"
 
 	"go.uber.org/zap"
@@ -15,4 +16,5 @@ var (
 	GOBY_LOG    *zap.Logger
 	GOBY_DB     *gorm.DB
 	GOBY_REDIS  *redis.Client
+	BlackCache  local_cache.Cache
 )
